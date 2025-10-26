@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+:root {
+  /* Playful Karada Color Palette */
+  --primary: #ff6b9d; /* Pink */
+  --secondary: #4ecdc4; /* Teal */
+  --accent: #ffe66d; /* Yellow */
+  --success: #95e1d3; /* Mint */
+  --danger: #ff6b6b; /* Red */
+
+  --background: #fef7ff; /* Light pink tint */
+  --surface: #ffffff;
+  --foreground: #2d3436;
+  --muted: #636e72;
+
+  /* Game UI Colors */
+  --lobby: #e8f4f8;
+  --canvas: #ffffff;
+  --guess-correct: #00d2a0;
+  --guess-incorrect: #ff6b6b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Playful animations */
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-wiggle {
+  animation: wiggle 0.5s ease-in-out;
+}
+
+/* Button styles */
+.btn {
+  @apply px-6 py-3 rounded-xl font-bold transition-all duration-200 cursor-pointer;
+  @apply hover:scale-105 active:scale-95;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+  transform: translateY(2px) scale(0.95);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, #ff8fab 100%);
+  color: white;
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--secondary) 0%, #5ed9d1 100%);
+  color: white;
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--accent) 0%, #ffed99 100%);
+  color: var(--foreground);
+}
+
+/* Card styles */
+.card {
+  @apply bg-white rounded-2xl p-6 shadow-lg;
+  border: 3px solid rgba(0, 0, 0, 0.05);
+}
+
+.card-hover {
+  @apply transition-all duration-300;
+  @apply hover:shadow-2xl hover:-translate-y-1;
+}
+
+/* Input styles */
+input, textarea {
+  @apply w-full px-4 py-3 rounded-xl border-2 border-gray-200;
+  @apply focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20;
+  @apply transition-all duration-200;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff8fab;
+}
+
+/* Wallet adapter overrides */
+.wallet-adapter-button {
+  @apply btn btn-primary !important;
+}
+
+/* Loading spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  @apply inline-block w-5 h-5 border-2 border-current border-t-transparent rounded-full;
+  animation: spin 0.6s linear infinite;
+}
