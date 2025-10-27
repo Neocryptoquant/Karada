@@ -76,6 +76,18 @@ body {
   }
 }
 
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .animate-bounce-in {
   animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -88,16 +100,35 @@ body {
   animation: wiggle 0.5s ease-in-out;
 }
 
+.animate-gradient {
+  animation: gradient 3s ease infinite;
+}
+
 /* Button styles */
 .btn {
-  @apply px-6 py-3 rounded-xl font-bold transition-all duration-200 cursor-pointer;
-  @apply hover:scale-105 active:scale-95;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  transition: all 0.2s;
+  cursor: pointer;
   box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+  border: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn:hover {
+  transform: scale(1.05);
 }
 
 .btn:active {
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
   transform: translateY(2px) scale(0.95);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .btn-primary {
@@ -117,20 +148,35 @@ body {
 
 /* Card styles */
 .card {
-  @apply bg-white rounded-2xl p-6 shadow-lg;
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   border: 3px solid rgba(0, 0, 0, 0.05);
 }
 
 .card-hover {
-  @apply transition-all duration-300;
-  @apply hover:shadow-2xl hover:-translate-y-1;
+  transition: all 0.3s;
+}
+
+.card-hover:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transform: translateY(-0.25rem);
 }
 
 /* Input styles */
 input, textarea {
-  @apply w-full px-4 py-3 rounded-xl border-2 border-gray-200;
-  @apply focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20;
-  @apply transition-all duration-200;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid #e5e7eb;
+  transition: all 0.2s;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.2);
 }
 
 /* Scrollbar */
@@ -154,7 +200,15 @@ input, textarea {
 
 /* Wallet adapter overrides */
 .wallet-adapter-button {
-  @apply btn btn-primary !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 0.75rem !important;
+  font-weight: 700 !important;
+  transition: all 0.2s !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1) !important;
+  background: linear-gradient(135deg, var(--primary) 0%, #ff8fab 100%) !important;
+  color: white !important;
+  border: none !important;
 }
 
 /* Loading spinner */
@@ -165,6 +219,11 @@ input, textarea {
 }
 
 .spinner {
-  @apply inline-block w-5 h-5 border-2 border-current border-t-transparent rounded-full;
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 9999px;
   animation: spin 0.6s linear infinite;
 }
